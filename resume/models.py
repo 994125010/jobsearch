@@ -9,6 +9,18 @@ class Experience(models.Model):
     keywords = models.CharField(max_length=500)
     format_str = "Exp: {0}"
 
+    @property
+    def display_date(self):
+        return self.end_date.year if self.end_date.year == self.start_date.year \
+            else "{0}-{1}".format(self.end_date.year, self.start_date.year % 100)
+
+    @property
+    def display_str(self):
+        s = self.desc
+        for kw in eval(self.keywords):
+            s = s.replace(kw, "<strong><code>{0}</code></strong>".format(kw))
+        return s
+
     def add_keyword(self, kw):
         updated = json.loads(self.keywords)
         updated.append(kw)
@@ -31,6 +43,15 @@ class Work(Experience):
 class Project(Experience):
     lang = models.CharField(max_length=200)
     format_str = "Proj: {0}"
+    lang2suffix = {
+        'C': '.c',
+        'Java': '.java',
+        'Python': '.py',
+    }
+
+    @property
+    def display_name(self):
+        return self.name + self.lang2suffix(self.lang)
 
 class Hobby(models.Model):
     name = models.CharField(max_length=200)

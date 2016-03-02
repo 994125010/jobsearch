@@ -9,6 +9,7 @@ from .models import Work
 from .models import Project
 from .models import Hobby
 from .models import Course
+from .models import Education
 
 def index(request):
     template_name = 'resume/index.html'
@@ -25,6 +26,8 @@ def index(request):
             'proj_lst': proj_lst,
             'hobbies': hobbies,
             'courses': courses,
+            'false': False,
+            'true': True,
     }
     return render(request, 'resume/index.html', context)
 

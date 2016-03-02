@@ -1,14 +1,13 @@
+<!DOCTYPE html>
 <html>
 	{% include "resume/header.html" %}
 	<body>
 		<div class="container">
 			<div class="row hidden-print">.</div>
 			{% include "resume/personal.html" %}
-			<div class="row">
-			<!-- {% include "resume/line.html" with title="Education" %}
-			{% include "resume/line.html" with title="Courses" list=courses %}
-			{% include "resume/line.html" with title="Interests" list=hobbies %} -->
-			</div>
+			{% include "resume/line.html" with section="Education" proj_work=false list_str=education.0 %}
+			{% include "resume/line.html" with section="Projects" proj_work=true list=proj_lst %}
+			<!--{% include "resume/line.html" with title="Interests" list=hobbies %} -->
 		</div>
 	</body>
 	{% include "resume/footer.html" %}
