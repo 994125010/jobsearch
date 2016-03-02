@@ -21,7 +21,7 @@ class Experience(models.Model):
         return json.loads(self.keywords)
     
     def __str__(self):
-        return self.format_str.format(self.name)
+        return self.name
 
 class Work(Experience):
     position = models.CharField(max_length=200)
@@ -36,10 +36,18 @@ class Hobby(models.Model):
     name = models.CharField(max_length=200)
     
     def __str__(self):
-        return "Hobby: "+self.name
+        return self.name
+
+class Education(models.Model):
+    school = models.CharField(max_length=200)
+    major = models.CharField(max_length=500)
+    gpa = models.CharField(max_length=3)
+
+    def __str__(self):
+        return "{0} (2016) - {1}. (GPA: {2})".format(self.school, self.major, self.gpa)
 
 class Course(models.Model):
     name = models.CharField(max_length=200)
 
     def __str__(self):
-        return "Course: "+self.name
+        return self.name
