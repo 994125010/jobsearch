@@ -15,7 +15,7 @@ h1 b {
 }
 
 .personal_info {
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 }
 
 h2 {
@@ -23,14 +23,30 @@ h2 {
 }
 
 .section {
-	margin-bottom: 10px;
+	margin-top: 60px;
+	margin-bottom: 20px;
 }
 
 h3 {
 	color: #77bbff;
-	font-size: 16px;
+	font-size: 14px;
 }
 
 .item {
-	margin-top: 5px;
+	margin-top: 12px;
+}
+
+@media print {
+  @page {
+    size: 8.5in 11in;
+    margin: 0in;
+  }
+
+  h3 {
+  	color: #77bbff;
+  }
+
+  .container {
+    width: 950px;
+  }
 }

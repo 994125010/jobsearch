@@ -12,7 +12,7 @@ class Experience(models.Model):
     @property
     def display_date(self):
         return self.end_date.year if self.end_date.year == self.start_date.year \
-            else "{0}-{1}".format(self.end_date.year, self.start_date.year % 100)
+            else "{0}-{1}".format(self.start_date.year, self.end_date.year)
 
     @property
     def display_str(self):
@@ -20,6 +20,10 @@ class Experience(models.Model):
         for kw in eval(self.keywords):
             s = s.replace(kw, "<strong><code>{0}</code></strong>".format(kw))
         return s
+
+    @property
+    def display_name(self):
+        return self.name
 
     def add_keyword(self, kw):
         updated = json.loads(self.keywords)
@@ -40,6 +44,17 @@ class Work(Experience):
     organization = models.CharField(max_length=200)
     format_str = "Work: {0}"
 
+    @property
+    def display_name(self):
+        return self.name+"<br>"+self.position
+
+    @property
+    def display_str(self):
+        s = self.desc
+        for kw in eval(self.keywords):
+            s = s.replace(kw, "<strong><code>{0}</code></strong>".format(kw))
+        return '<br>'.join(s.split('.'))
+
 class Project(Experience):
     lang = models.CharField(max_length=200)
     format_str = "Proj: {0}"
@@ -51,7 +66,7 @@ class Project(Experience):
 
     @property
     def display_name(self):
-        return self.name + self.lang2suffix(self.lang)
+        return self.name + self.lang2suffix[self.lang]
 
 class Hobby(models.Model):
     name = models.CharField(max_length=200)

@@ -6,8 +6,10 @@
 			<div class="row hidden-print">.</div>
 			{% include "resume/personal.html" %}
 			{% include "resume/line.html" with section="Education" proj_work=false list_str=education.0 %}
+			{% include "resume/line.html" with section="Work Experience" proj_work=true list=work_exp %}
 			{% include "resume/line.html" with section="Projects" proj_work=true list=proj_lst %}
-			<!--{% include "resume/line.html" with title="Interests" list=hobbies %} -->
+			{% include "resume/line.html" with section="Courses" proj_work=false list_str=courses %}
+			{% include "resume/line.html" with section="Interests" proj_work=false list_str=hobbies %}
 		</div>
 	</body>
 	{% include "resume/footer.html" %}
