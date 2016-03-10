@@ -10,6 +10,7 @@ from .models import Project
 from .models import Hobby
 from .models import Course
 from .models import Education
+from .models import Skill
 
 def index(request):
     template_name = 'resume/index.html'
@@ -18,6 +19,7 @@ def index(request):
     proj_lst = Project.objects.order_by('-end_date')[:8]
     hobbies = ', '.join([e.name for e in Hobby.objects.all()])
     courses = ', '.join([e.name for e in Course.objects.all()[::-1]])
+    skills = ', '.join([e.name for e in Skill.objects.all()])
     education = Education.objects.all()
     template = loader.get_template('resume/index.html')
     context = {
@@ -26,6 +28,7 @@ def index(request):
             'proj_lst': proj_lst,
             'hobbies': hobbies,
             'courses': courses,
+            'skills': skills,
             'false': False,
             'true': True,
     }
